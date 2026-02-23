@@ -7,7 +7,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(routes, withComponentInputBinding()), //bind route parameter, query string to component with input
     provideHttpClient(withFetch()),
   ],
 };

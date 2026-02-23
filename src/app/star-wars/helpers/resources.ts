@@ -1,5 +1,5 @@
 import { httpResource } from '@angular/common/http';
-import { Person, ResultsList, ResultsListParams } from '../types';
+import { Film, Person, Planet, ResultsList, ResultsListParams } from '../types';
 
 export async function fetchResource<T>(url: string, abortSignal?: AbortSignal | null): Promise<T>;
 export async function fetchResource<T>(
@@ -15,7 +15,7 @@ export async function fetchResource<T>(
   if (url === null) {
     return null;
   }
-  const res = await fetch(url, { signal: abortSignal });
+  const res = await fetch(url, { signal: abortSignal, cache: 'force-cache' }); //force-cache เพื่อป้องกัน rate limit
   return await res.json();
 }
 
@@ -34,4 +34,34 @@ export function peopleListResource(params: () => ResultsListParams | undefined) 
 
 export function personResource(id: () => string | undefined) {
   return httpResource<Person>(() => (id() ? `${entryPointURL}/people/${id()!}` : undefined));
+}
+
+export function planetListResource(params: () => ResultsListParams | undefined) {
+  return httpResource<ResultsList<Planet>>(() =>
+    params()
+      ? {
+          url: `${entryPointURL}/planets`,
+          params: { ...params()! },
+        }
+      : undefined,
+  );
+}
+
+export function planetResource(id: () => string | undefined) {
+  return httpResource<Planet>(() => (id() ? `${entryPointURL}/planets/${id()!}` : undefined));
+}
+
+export function filmListResource(params: () => ResultsListParams | undefined) {
+  return httpResource<ResultsList<Film>>(() =>
+    params()
+      ? {
+          url: `${entryPointURL}/films`,
+          params: { ...params()! },
+        }
+      : undefined,
+  );
+}
+
+export function filmResource(id: () => string | undefined) {
+  return httpResource<Film>(() => (id() ? `${entryPointURL}/films/${id()!}` : undefined));
 }

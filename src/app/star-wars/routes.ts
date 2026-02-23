@@ -39,7 +39,7 @@ export default [
         ],
       },
       {
-        path: 'people',
+        path: 'planet',
         children: [
           { path: '', component: PlanetsListPage },
           { path: ':id', component: PlanetViewPage },

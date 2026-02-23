@@ -39,7 +39,7 @@ export class PeopleListPage {
       }
 
       const url = new URL(urlText);
-      return url.searchParams.get('page');
+      return url.searchParams.get('page'); //searchParams เป็น property ของ URL Object ที่จะดึงเอาเฉพาะส่วนที่อยู่หลังเครื่องหมาย ? ผลลัพธ์ที่ได้ออกมาจากคำสั่งนี้ก็คือ String คำว่า '2'
     } else {
       return null;
     }
@@ -62,6 +62,7 @@ export class PeopleListPage {
 
   protected onSearch(): void {
     submit(
+      //รับค่า (Arguments) 2 ตัวหลักๆ ตัวฟอร์ม แอ็กชันที่จะให้ทำ
       this.form,
       async (form) =>
         void this.router.navigate([], {
