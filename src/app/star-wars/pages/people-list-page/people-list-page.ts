@@ -62,7 +62,7 @@ export class PeopleListPage {
 
   protected onSearch(): void {
     submit(
-      //รับค่า (Arguments) 2 ตัวหลักๆ ตัวฟอร์ม แอ็กชันที่จะให้ทำ
+      //รับค่า (Arguments) 2 ตัวหลักๆ 1.ตัวฟอร์ม 2.แอ็กชันที่จะให้ทำ
       this.form,
       async (form) =>
         void this.router.navigate([], {

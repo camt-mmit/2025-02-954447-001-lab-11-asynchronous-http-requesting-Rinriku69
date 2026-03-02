@@ -17,11 +17,6 @@ export class PersonViewPage {
   protected readonly moduleRoute = inject(ModuleRoute);
   readonly dataResource = personResource(() => this.id()); //or เขียนเป็นฟังชั่นไปเลย personResource(this.id)
 
-  /* private readonly location = inject(Location);
-
-  protected goBack(): void {
-    this.location.back();
-  } */
 
   protected goBack(): void {
     history.back(); //ไม่ค่อยแนะนำ
