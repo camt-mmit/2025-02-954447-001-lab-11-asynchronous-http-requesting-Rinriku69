@@ -2,11 +2,15 @@ import { inject, Injectable, ResourceRef } from '@angular/core';
 import { OauthClient } from './oauth.client';
 import { HttpClient } from '@angular/common/http';
 import {
+  CalendarResource,
+  GoogleCalendarEvent,
+  GoogleCalendarEventInsertResource,
+  GoogleCalendarEventsInsertRequest,
   GoogleCalendarEventsListRequest,
   GoogleCalendarEventsListResponse,
 } from '../types/google/calendar';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { defer, switchMap } from 'rxjs';
+import { defer, firstValueFrom, switchMap } from 'rxjs';
 
 const baseUrl = 'https://www.googleapis.com/calendar/v3/calendars';
 
@@ -36,5 +40,22 @@ export class CalendarService {
         ); //defer async -> observable
       },
     });
+  }
+
+  insertEvent(
+    options: GoogleCalendarEventsInsertRequest,
+    body: GoogleCalendarEventInsertResource,
+  ): Promise<GoogleCalendarEvent> {
+    const { calendarId, requestBody, ...params } = options;
+    return firstValueFrom(
+      defer(async () => await this.client.getAuthorizationHeaders()).pipe(
+        switchMap((headers) =>
+          this.http.post<GoogleCalendarEvent>(`${baseUrl}/${calendarId}/events`, body, {
+            headers: { ...headers },
+            params,
+          }),
+        ),
+      ),
+    );
   }
 }

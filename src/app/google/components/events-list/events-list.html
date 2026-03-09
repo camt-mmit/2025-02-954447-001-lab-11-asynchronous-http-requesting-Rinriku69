@@ -1,1 +1,5 @@
-<p>events-list works!</p>
+<ul>
+  @for (item of items(); track item) {
+    <li>{{ item.summary }}</li>
+  }
+</ul>

@@ -1,12 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FieldTree, FormField } from '@angular/forms/signals';
+import { CalendarEventInsertModel } from '../../helpers';
 
 @Component({
   selector: 'app-events-field-tree',
-  imports: [],
+  imports: [FormField],
   templateUrl: './events-field-tree.html',
   styleUrl: './events-field-tree.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventsFieldTree {
+  readonly fieldTree = input.required<FieldTree<CalendarEventInsertModel>>();
+
 
 }
