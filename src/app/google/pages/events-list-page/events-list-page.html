@@ -1,0 +1,15 @@
+<form>
+  <input type="text" [formField]="form.q" />
+  <button type="button">Search</button>
+</form>
+@if (resource.hasValue()) {
+  <ul>
+    @for (item of resource.value().items; track $index) {
+      <li>{{ item.summary }}</li>
+    }
+  </ul>
+} @else if (resource.error(); as error) {
+  <p>{{ error.message }}</p>
+} @else if (resource.isLoading()) {
+  <p>Loading....</p>
+}

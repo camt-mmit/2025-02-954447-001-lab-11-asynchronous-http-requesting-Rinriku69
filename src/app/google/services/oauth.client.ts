@@ -224,6 +224,7 @@ export class OauthClient {
 
     await this.requestToken(formData);
 
+    this.removeState(stateCode);
     return state;
   }
 
@@ -269,6 +270,8 @@ export class OauthClient {
   async clearToken(): Promise<void> {
     this.removeAccessTokenData();
     this.removeRefreshToken();
+
+    await this.getAccessToken();
   }
 
   //untracked  เผื่อถูกเรียกในreactiveตัวอื่น
