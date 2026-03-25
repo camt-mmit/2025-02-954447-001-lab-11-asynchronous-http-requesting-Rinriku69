@@ -27,15 +27,23 @@
         <li>
           <div class="contact-item">
             <img 
-              [src]="person.photos?.[0]?.url ?? 'assets/default-avatar.png'" 
-              alt="Profile" 
-              width="40" 
-              height="40" 
+            #profileImg
+            [src]="person.photos?.[0]?.url " 
+            (error)="profileImg.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+            alt="Profile" 
+            width="40" 
+            height="40" 
             />
             <div class="contact-info">
               <strong>{{ person.names?.[0]?.displayName || 'Unknown Name' }}</strong>
               @if (person.emailAddresses?.length) {
                 <span class="email">{{ person.emailAddresses![0].value }}</span>
+              }
+              @if(person.phoneNumbers?.length){
+                @for(phoneNumber of person.phoneNumbers; track phoneNumber.metadata?.source?.id){
+                    <p><span class="phone-type">{{phoneNumber.type}}: </span> <span class="phone-value">{{phoneNumber.value}}</span></p>
+                }
+                 
               }
             </div>
           </div>

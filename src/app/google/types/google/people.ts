@@ -90,6 +90,14 @@ export interface GooglePersonPhoneNumber {
     readonly formattedType?: string;
     /** The read-only canonicalized ITU-T E.164 form of the phone number. */
     readonly canonicalForm?: string;
+
+    readonly metadata?: {
+        primary: boolean;
+        source: {
+            type: string;
+            id: string
+        }
+    }
 }
 
 export interface GooglePersonPhoto {
