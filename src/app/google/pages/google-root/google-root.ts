@@ -15,7 +15,7 @@ export class GoogleRoot {
 
   protected async login(): Promise<void> {
     const url = await this.client.getAuthorizationCodeUrl(
-      ['profile', 'email', 'openid', 'https://www.googleapis.com/auth/calendar.events'],
+      ['profile', 'email', 'openid', 'https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/contacts'],
       {
         prompt: 'consent',
         access_type: 'offline',

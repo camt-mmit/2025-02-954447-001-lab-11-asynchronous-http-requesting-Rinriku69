@@ -7,6 +7,9 @@ import { OauthClient } from './services/oauth.client';
 import { EventsListPage } from './pages/events-list-page/events-list-page';
 import { EventsInsertPage } from './pages/events-insert-page/events-insert-page';
 import { CalendarService } from './services/calendar.service';
+import { PeopleListPage } from './pages/people-list-page/people-list-page';
+import { PeopleInsertPage } from './components/people-insert-page/people-insert-page';
+import { PeopleService } from './services/people.service';
 
 export default [
   {
@@ -18,6 +21,7 @@ export default [
       },
       OauthClient,
       CalendarService, // DI
+      PeopleService
     ], // module services will be added here / ใส่เป็นobjectหรือclass ก็ได้
     children: [
       { path: 'authorization', component: AuthorizationPage },
@@ -33,6 +37,13 @@ export default [
               { path: 'insert', component: EventsInsertPage },
             ],
           },
+          {
+            path: 'contact',
+            children: [
+              { path: '', component: PeopleListPage },
+              { path: 'insert', component: PeopleInsertPage }
+            ],
+          }
         ],
       },
     ],

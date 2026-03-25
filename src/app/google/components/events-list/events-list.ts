@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { GoogleCalendarEvent } from '../../types/google/calendar';
-import { RouterLinkActive } from "@angular/router";
+
 
 @Component({
   selector: 'app-events-list',
-  imports: [RouterLinkActive],
+  imports: [],
   templateUrl: './events-list.html',
   styleUrl: './events-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
